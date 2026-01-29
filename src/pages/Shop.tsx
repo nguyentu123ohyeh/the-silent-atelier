@@ -5,7 +5,6 @@ import { ProductCard } from "@/components/products/ProductCard";
 import {
   products,
   fiberTypes,
-  colorPalettes,
   occasions,
 } from "@/data/products";
 
@@ -79,30 +78,6 @@ const Shop = () => {
                       }`}
                     >
                       {fiber}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Color Palette */}
-              <div className="flex items-center gap-3">
-                <span className="text-caption text-muted-foreground">
-                  Palette
-                </span>
-                <div className="flex gap-2">
-                  {colorPalettes.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() =>
-                        setSelectedColor(selectedColor === color ? null : color)
-                      }
-                      className={`text-xs tracking-wider px-3 py-1.5 transition-colors ${
-                        selectedColor === color
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {color}
                     </button>
                   ))}
                 </div>
