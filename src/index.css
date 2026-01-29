@@ -2,95 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/montserrat/100.css";
+@import "@fontsource/montserrat/200.css";
+@import "@fontsource/montserrat/300.css";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+
+/* Grosnick Couture Design System
+   A silent atelier aesthetic - extreme minimalism with haute couture refinement
+   Colors: Deep Charcoal, Warm Bone, Sage Green
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Palette - Deep Charcoal as primary dark */
+    --background: 60 3% 96%; /* Warm Bone #F5F5F2 */
+    --foreground: 0 0% 10%; /* Deep Charcoal #1A1A1A */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 60 3% 96%;
+    --card-foreground: 0 0% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 60 3% 96%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Charcoal */
+    --primary: 0 0% 10%;
+    --primary-foreground: 60 3% 96%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Sage Green #B2AC88 */
+    --secondary: 53 19% 61%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted tones */
+    --muted: 60 3% 90%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Sage Green */
+    --accent: 53 19% 61%;
+    --accent-foreground: 0 0% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 60 3% 96%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 0 0% 10%;
 
-    --radius: 0.5rem;
+    --radius: 0;
 
-    --sidebar-background: 0 0% 98%;
+    /* Custom design tokens */
+    --charcoal: 0 0% 10%;
+    --bone: 60 3% 96%;
+    --sage: 53 19% 61%;
+    --shadow: 0 0% 5%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Typography */
+    --font-serif: "Cormorant Garamond", Georgia, serif;
+    --font-sans: "Montserrat", system-ui, sans-serif;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Spacing rhythm */
+    --section-padding: 8rem;
+    --container-max: 1400px;
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Transitions */
+    --transition-slow: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-medium: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 10%;
+    --foreground: 60 3% 96%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 12%;
+    --card-foreground: 60 3% 96%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 60 3% 96%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 60 3% 96%;
+    --primary-foreground: 0 0% 10%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 53 19% 61%;
+    --secondary-foreground: 60 3% 96%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 53 19% 61%;
+    --accent-foreground: 0 0% 10%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 60 3% 96%;
   }
 }
 
@@ -99,7 +107,123 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+  }
+
+  /* Selection styling */
+  ::selection {
+    background: hsl(var(--sage));
+    color: hsl(var(--charcoal));
+  }
+}
+
+@layer components {
+  /* Elegant underline animation for links */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute w-full h-px bottom-0 left-0 bg-current origin-left;
+    transform: scaleX(0);
+    transition: transform var(--transition-medium);
+  }
+  
+  .link-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Section container */
+  .section-container {
+    @apply mx-auto px-6 md:px-12 lg:px-20;
+    max-width: var(--container-max);
+  }
+
+  /* Elegant button styles */
+  .btn-atelier {
+    @apply inline-flex items-center justify-center px-12 py-4 text-xs tracking-[0.3em] uppercase font-medium transition-all duration-500;
+    font-family: var(--font-sans);
+  }
+
+  .btn-atelier-primary {
+    @apply btn-atelier bg-primary text-primary-foreground hover:bg-secondary hover:text-secondary-foreground;
+  }
+
+  .btn-atelier-outline {
+    @apply btn-atelier border border-current bg-transparent hover:bg-primary hover:text-primary-foreground;
+  }
+
+  /* Typography utilities */
+  .text-display {
+    @apply text-5xl md:text-7xl lg:text-8xl;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .text-headline {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+
+  .text-subhead {
+    @apply text-lg md:text-xl;
+    font-family: var(--font-sans);
+    font-weight: 200;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .text-body-elegant {
+    @apply text-base md:text-lg;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  .text-caption {
+    @apply text-xs tracking-[0.2em] uppercase;
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  /* Product card hover effect */
+  .product-image-container {
+    @apply relative overflow-hidden;
+  }
+
+  .product-image-container .primary-image {
+    @apply transition-opacity duration-700;
+  }
+
+  .product-image-container .texture-image {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-700;
+  }
+
+  .product-image-container:hover .primary-image {
+    @apply opacity-0;
+  }
+
+  .product-image-container:hover .texture-image {
+    @apply opacity-100;
   }
 }
