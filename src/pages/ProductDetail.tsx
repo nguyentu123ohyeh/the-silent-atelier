@@ -16,13 +16,10 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <Layout>
-        <div className="section-container py-24 text-center">
-          <h1 className="text-headline mb-4">Piece Not Found</h1>
-          <p className="text-muted-foreground mb-8">
-            This piece may no longer be available.
-          </p>
-          <Link to="/shop" className="btn-atelier-primary">
-            Return to Archive
+        <div className="section-container py-32 text-center">
+          <h1 className="text-3xl font-serif mb-6 text-foreground">Archive Piece Not Found</h1>
+          <Link to="/shop" className="text-sm uppercase tracking-widest underline underline-offset-8 text-muted-foreground hover:text-foreground transition-colors">
+            Return to Collection
           </Link>
         </div>
       </Layout>
@@ -33,130 +30,127 @@ const ProductDetail = () => {
 
   return (
     <Layout>
-      <section className="py-12 md:py-20 bg-background">
+      <section className="pt-32 pb-20 bg-background">
         <div className="section-container">
-          {/* Back Link */}
+          {/* Back Navigation */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4 }}
+            className="mb-12"
           >
-            <Link
-              to="/shop"
-              className="inline-flex items-center gap-2 text-caption text-muted-foreground hover:text-foreground mb-12 transition-colors"
+            <Link 
+              to="/shop" 
+              className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ChevronLeft className="w-4 h-4" />
-              Back to Archive
+              <ChevronLeft className="w-3 h-3" /> Back to Archive
             </Link>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
-            {/* Image Gallery */}
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+            {/* --- Image Gallery (Full View) --- */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-4"
+              className="space-y-6"
             >
-              {/* Main Image */}
-              <div className="aspect-[4/5] bg-muted overflow-hidden">
+              {/* Main Image Container */}
+              <div className="aspect-[4/5] bg-secondary/30 overflow-hidden flex items-center justify-center border border-border/50">
                 <img
                   src={galleryImages[selectedImage]}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="max-w-full max-h-full object-contain transition-all duration-700"
                 />
               </div>
 
-              {/* Thumbnail Strip */}
-              <div className="flex gap-4">
-                {galleryImages.map((image, index) => (
+              {/* Thumbnails */}
+              <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                {galleryImages.map((img, idx) => (
                   <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`aspect-square w-20 bg-muted overflow-hidden transition-opacity ${
-                      selectedImage === index
-                        ? "opacity-100 ring-1 ring-foreground"
-                        : "opacity-60 hover:opacity-100"
+                    key={idx}
+                    onClick={() => setSelectedImage(idx)}
+                    className={`min-w-[80px] w-20 aspect-square bg-secondary/50 overflow-hidden transition-all flex items-center justify-center border ${
+                      selectedImage === idx 
+                        ? "border-foreground opacity-100 shadow-sm" 
+                        : "border-transparent opacity-40 hover:opacity-100"
                     }`}
                   >
-                    <img
-                      src={image}
-                      alt={`${product.name} view ${index + 1}`}
-                      className="w-full h-full object-cover"
+                    <img 
+                      src={img} 
+                      alt={`${product.name} view ${idx + 1}`} 
+                      className="w-full h-full object-contain p-1" 
                     />
                   </button>
                 ))}
               </div>
             </motion.div>
 
-            {/* Product Info */}
+            {/* --- Product Information --- */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="lg:sticky lg:top-32 lg:self-start"
+              className="lg:sticky lg:top-32 lg:self-start flex flex-col"
             >
-              <p className="text-caption text-muted-foreground mb-4">
-                {product.collection}
-              </p>
-              <h1 className="text-4xl md:text-5xl font-serif mb-6">
-                {product.name}
-              </h1>
-              <p className="text-body-elegant text-muted-foreground mb-8">
-                {product.description}
-              </p>
+              <div className="mb-10">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-gold mb-4">
+                  {product.collection}
+                </p>
+                <h1 className="text-4xl md:text-5xl font-serif mb-3 text-foreground tracking-tight">
+                  {product.name}
+                </h1>
+                
+                {/* Product Price */}
+                <p className="text-2xl font-serif text-foreground/80 italic mb-8">
+                  {product.price}
+                </p>
 
-              {/* Specifications */}
-              <div className="border-t border-border pt-8 mb-8">
-                <h2 className="text-caption mb-6">Specifications</h2>
-                <dl className="space-y-4">
-                  <div className="flex justify-between">
-                    <dt className="text-muted-foreground">Fiber</dt>
-                    <dd>{product.fiber}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-muted-foreground">Fabric Weight</dt>
-                    <dd>{product.fabricWeight}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-muted-foreground">Thread Count</dt>
-                    <dd>{product.threadCount}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-muted-foreground">Origin</dt>
-                    <dd>{product.origin}</dd>
-                  </div>
-                  <div className="flex justify-between">
-                    <dt className="text-muted-foreground">Color Palette</dt>
-                    <dd>{product.colorPalette}</dd>
-                  </div>
-                </dl>
+                <p className="text-lg text-muted-foreground leading-relaxed font-light">
+                  {product.description}
+                </p>
               </div>
 
-              {/* CTA Button */}
+              {/* Specifications Table */}
+              <div className="border-t border-border py-8 space-y-4 mb-10">
+                <h2 className="text-[10px] uppercase tracking-widest text-muted-foreground mb-4">Specifications</h2>
+                {[
+                  { label: "Fiber", value: product.fiber },
+                  { label: "Weight", value: product.fabricWeight },
+                  { label: "Finish", value: product.threadCount },
+                  { label: "Origin", value: product.origin },
+                ].map((spec) => (
+                  <div key={spec.label} className="flex justify-between text-sm py-1 border-b border-border/30 last:border-0">
+                    <span className="text-muted-foreground font-light">{spec.label}</span>
+                    <span className="font-medium text-foreground">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bespoke Inquiry Button */}
               <button
                 onClick={() => setInquiryOpen(true)}
-                className="btn-atelier-primary w-full mb-8"
+                className="w-full py-5 bg-foreground text-background text-[11px] uppercase tracking-[0.3em] hover:bg-foreground/90 transition-all mb-12 shadow-md active:scale-[0.98]"
               >
-                Inquire for Measurements
+                Inquire for Bespoke Service
               </button>
 
-              <p className="text-xs text-muted-foreground text-center">
-                Price: {product.price}
-              </p>
-
-              {/* Curator's Note */}
-              <div className="border-t border-border pt-8 mt-12">
-                <h2 className="text-caption mb-6">Curator's Note</h2>
-                <blockquote className="font-serif text-lg italic leading-relaxed text-muted-foreground">
-                  {product.curatorNote}
+              {/* Curator's Note Section */}
+              <div className="border-t border-border pt-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="h-px w-8 bg-gold" />
+                  <h2 className="text-[10px] uppercase tracking-widest text-muted-foreground">Curator's Note</h2>
+                </div>
+                <blockquote className="font-serif text-xl italic text-muted-foreground leading-relaxed">
+                  "{product.curatorNote}"
                 </blockquote>
+                <p className="mt-4 text-[11px] uppercase tracking-wider text-foreground/60">— Karin Grosnick</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Inquiry Form Modal */}
       <InquiryModal
         isOpen={inquiryOpen}
         onClose={() => setInquiryOpen(false)}

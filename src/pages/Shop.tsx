@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/products/ProductCard";
 import {
   products,
   fiberTypes,
+  colorPalettes,
   occasions,
 } from "@/data/products";
 

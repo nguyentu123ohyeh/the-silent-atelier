@@ -4,24 +4,22 @@ import { Layout } from "@/components/layout/Layout";
 import { ProductCard } from "@/components/products/ProductCard";
 import { products, collections } from "@/data/products";
 import heroImage from "@/assets/hero-silk-drape.jpg";
-import silkShirt from "@/assets/products/midnight-silk-shirt.jpg";
-import cashmereKnit from "@/assets/products/cashmere-structured-knit.jpg";
-import woolCoat from "@/assets/products/tailored-wool-coat.jpg";
 
+// 1. CẬP NHẬT MAPPING ẢNH: Phải khớp chính xác với ID trong file products.ts mới
 const collectionImages: Record<string, string> = {
-  "midnight-series": silkShirt,
-  "architectural-knits": cashmereKnit,
-  "tailored-structures": woolCoat,
+  "the-silk-archive": "https://m.media-amazon.com/images/I/81yQYAr7N3L._AC_SX569_.jpg",
+  "linen-essentials": "https://m.media-amazon.com/images/I/81+oQBvBR-L._AC_SY550_.jpg",
+  "architectural-knits": "https://m.media-amazon.com/images/I/81-1Wz2P9gL._AC_SX569_.jpg",
 };
 
 const Index = () => {
+  // Lấy 3 sản phẩm đầu tiên để hiển thị phần Featured
   const featuredProducts = products.slice(0, 3);
 
   return (
     <Layout>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        {/* Background Image with Slow Zoom */}
         <motion.div
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -36,13 +34,12 @@ const Index = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/20 to-background" />
         </motion.div>
 
-        {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-subhead text-bone mb-6"
+            className="text-[12px] uppercase tracking-[0.4em] text-bone mb-6"
           >
             Syracuse, New York
           </motion.p>
@@ -50,7 +47,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-display text-bone mb-8"
+            className="text-5xl md:text-7xl font-serif text-bone mb-8"
           >
             Grosnick Couture
           </motion.h1>
@@ -58,9 +55,9 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-lg md:text-xl text-bone/80 font-light max-w-2xl mx-auto mb-12"
+            className="text-lg md:text-xl text-bone/80 font-light max-w-2xl mx-auto mb-12 italic"
           >
-            Artisanal Silhouettes for the Modern Individual
+            "Artisanal Silhouettes for the Modern Individual"
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,14 +66,13 @@ const Index = () => {
           >
             <Link
               to="/shop"
-              className="btn-atelier border border-bone text-bone hover:bg-bone hover:text-charcoal transition-all duration-500"
+              className="px-10 py-4 border border-bone text-bone text-[11px] uppercase tracking-[0.3em] hover:bg-bone hover:text-charcoal transition-all duration-500"
             >
               Enter the Archive
             </Link>
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -92,7 +88,7 @@ const Index = () => {
       </section>
 
       {/* Collections Section */}
-      <section className="py-section bg-background">
+      <section className="py-24 bg-background">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -101,10 +97,10 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <p className="text-caption text-muted-foreground mb-4">
+            <p className="text-[10px] uppercase tracking-[0.3em] text-gold mb-4">
               The Collections
             </p>
-            <h2 className="text-headline">Curated Silhouettes</h2>
+            <h2 className="text-4xl md:text-5xl font-serif">Curated Silhouettes</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
@@ -117,17 +113,18 @@ const Index = () => {
                 viewport={{ once: true }}
               >
                 <Link to="/shop" className="group block">
-                  <div className="aspect-[3/4] overflow-hidden bg-muted mb-6">
+                  {/* Container ảnh: HIỆN FULL ẢNH VÀ CÓ MÀU */}
+                  <div className="aspect-[3/4] overflow-hidden bg-secondary/30 mb-6 flex items-center justify-center border border-border/50">
                     <img
                       src={collectionImages[collection.id]}
                       alt={collection.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="font-serif text-2xl mb-2 group-hover:text-sage transition-colors">
+                  <h3 className="font-serif text-2xl mb-2 group-hover:text-gold transition-colors duration-300">
                     {collection.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground font-light">
+                  <p className="text-sm text-muted-foreground font-light leading-relaxed">
                     {collection.fiber} · {collection.description}
                   </p>
                 </Link>
@@ -138,7 +135,7 @@ const Index = () => {
       </section>
 
       {/* Philosophy Block */}
-      <section className="py-section bg-primary text-primary-foreground">
+      <section className="py-24 bg-foreground text-background">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -147,13 +144,13 @@ const Index = () => {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto text-center"
           >
-            <p className="text-caption text-primary-foreground/60 mb-8">
+            <p className="text-[10px] uppercase tracking-[0.3em] opacity-60 mb-8">
               Philosophy
             </p>
-            <blockquote className="text-3xl md:text-4xl lg:text-5xl font-serif italic leading-relaxed mb-8">
+            <blockquote className="text-3xl md:text-4xl font-serif italic leading-relaxed mb-8">
               "Clothing is the architecture of the soul."
             </blockquote>
-            <p className="text-lg text-primary-foreground/70">
+            <p className="text-sm uppercase tracking-widest opacity-80">
               — Karin Grosnick, Creative Director
             </p>
           </motion.div>
@@ -161,7 +158,7 @@ const Index = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="py-section bg-background">
+      <section className="py-24 bg-background">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -171,14 +168,14 @@ const Index = () => {
             className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16"
           >
             <div>
-              <p className="text-caption text-muted-foreground mb-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-4">
                 Featured Works
               </p>
-              <h2 className="text-headline">From the Archive</h2>
+              <h2 className="text-4xl font-serif">From the Archive</h2>
             </div>
             <Link
               to="/shop"
-              className="mt-6 md:mt-0 text-caption link-underline"
+              className="mt-6 md:mt-0 text-[10px] uppercase tracking-widest border-b border-foreground pb-1 hover:text-gold hover:border-gold transition-all"
             >
               View All Pieces
             </Link>
@@ -193,7 +190,7 @@ const Index = () => {
       </section>
 
       {/* Atelier CTA */}
-      <section className="py-section bg-muted">
+      <section className="py-24 bg-secondary/20">
         <div className="section-container">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -203,26 +200,28 @@ const Index = () => {
             className="grid md:grid-cols-2 gap-16 items-center"
           >
             <div>
-              <p className="text-caption text-muted-foreground mb-4">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-gold mb-4">
                 The Atelier
               </p>
-              <h2 className="text-headline mb-6">
+              <h2 className="text-4xl font-serif mb-6 leading-tight">
                 Bespoke Begins with Conversation
               </h2>
-              <p className="text-body-elegant text-muted-foreground mb-8">
+              <p className="text-lg text-muted-foreground mb-8 font-light leading-relaxed">
                 Every piece in our archive is made to your exact measurements.
-                We invite you to visit our Syracuse atelier for a private
-                consultation, where we'll discuss fabric, fit, and the subtle
-                details that make clothing truly yours.
+                We invite you to contact us for a private consultation in Syracuse, 
+                where we'll discuss fiber, fit, and the subtle details that make clothing truly yours.
               </p>
-              <Link to="/contact" className="btn-atelier-primary">
+              <Link 
+                to="/contact" 
+                className="inline-block bg-foreground text-background px-10 py-4 text-[11px] uppercase tracking-[0.3em] hover:bg-foreground/80 transition-all"
+              >
                 Request Consultation
               </Link>
             </div>
-            <div className="aspect-square bg-primary/5 flex items-center justify-center">
+            <div className="aspect-square bg-white flex items-center justify-center border border-border shadow-sm">
               <div className="text-center p-8">
-                <p className="font-serif text-6xl text-sage mb-4">118</p>
-                <p className="text-caption text-muted-foreground">
+                <p className="font-serif text-8xl text-gold/30 mb-4">118</p>
+                <p className="text-[12px] uppercase tracking-[0.4em] text-muted-foreground leading-loose">
                   Chestnut Street
                   <br />
                   Syracuse, New York
